@@ -1,0 +1,122 @@
+type ClaimPage{
+    content: [Claim!]!
+    totalElements: Int
+    totalPages: Int
+    currentPage: Int!
+}
+
+
+type Query {
+    members: [Member!]!
+    memberById(id: ID!): MemberDto
+    plans: [Plan!]!
+    providers: [Provider!]!
+    enrollments: [Enrollment!]!
+    #    activeEnrollment(memberId:ID):Enrollment
+    claims(memberId: ID!, page: Int = 0, size: Int = 10): [Claim!]!
+    #    claims(memberId: ID!): [Claim!]!
+    claimsList(memberId: ID!, page: Int!, size: Int!): ClaimPage
+    getByClaimNumber(claimNumber:String!) : Claim!
+}
+
+type Member {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    dateOfBirth: String
+    email: String
+    phone: String
+    enrollments: [Enrollment!]!
+    activeEnrollment: Enrollment
+    claims: [Claim!]!
+}
+
+type MemberDto{
+    id: ID!
+    firstName: String!
+    lastName: String!
+    dateOfBirth: String
+    email: String
+    phone: String
+    mailingAddress: Address
+    enrollments: [Enrollment!]!
+    activeEnrollment: Enrollment
+    claims: [Claim!]!
+}
+
+type Address {
+    line1: String
+    line2: String
+    city: String
+    state: String
+    postalCode: String
+}
+
+type Enrollment {
+    id: ID!
+    plan: Plan!
+    coverageStart: String
+    coverageEnd: String
+    active: Boolean!
+    accumulators: [Accumulator!]!
+}
+
+type Plan {
+    id: ID!
+    name: String!
+    type: String!
+    networkName: String
+    planYear: Int
+}
+
+type Provider {
+    id: ID!
+    name: String!
+    specialty: String
+    phone: String
+    address: String
+}
+
+type Claim {
+    id: ID!
+    claimNumber: String!
+    provider: Provider!
+    serviceStartDate: String
+    serviceEndDate: String
+    receivedDate: String
+    status: String!
+    totalBilled: Float
+    totalAllowed: Float
+    totalPlanPaid: Float
+    totalMemberResponsibility: Float
+    lines: [ClaimLine!]!
+    statusHistory: [ClaimStatusEvent!]!
+}
+
+type ClaimLine {
+    id: ID!
+    lineNumber: Int!
+    cptCode: String
+    description: String
+    billedAmount: Float
+    allowedAmount: Float
+    deductibleApplied: Float
+    copayApplied: Float
+    coinsuranceApplied: Float
+    planPaid: Float
+    memberResponsibility: Float
+}
+
+type ClaimStatusEvent {
+    id: ID!
+    status: String!
+    occurredAt: String
+}
+
+type Accumulator {
+    id: ID!
+    type: String!
+    tier: String!
+    limitAmount: Float
+    usedAmount: Float
+}
