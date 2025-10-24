@@ -98,10 +98,6 @@ export default function ClaimDetail() {
                 <p className="text-md ">Member Responsibility</p>
                 <p className="text-sm">${data?.totalMemberResponsibility}</p>
               </div>
-              <div className=" w-1/2 col-info flex justify-between items-center">
-                <p className="text-md text-gray-700">Total Billed</p>
-                <p className="font-light text-sm">${data?.totalBilled}</p>
-              </div>
             </div>
           </div>
 
