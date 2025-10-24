@@ -5,6 +5,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useClaimDetailData } from "../hooks/useClaimDetailData";
 
+import { getClaimStatusClasses } from "../util/claimStatusColors";
+import { type ClaimStatusType } from "../types/types";
+
 // interface Props {
 //   claimNumber: string;
 // }
@@ -37,15 +40,9 @@ export default function ClaimDetail() {
               <div className="col-info">
                 <p className="text-xl font-semibold text-gray-700">Status</p>
                 <p
-                  className={`bg-green-200 w-fit py-1 px-2 rounded-2xl text-xl font-semibold text-gray-700 capitalize ${
-                    data?.status === "PROCESSED"
-                      ? "bg-green-100 text-green-700"
-                      : data?.status === "DENIED"
-                      ? "bg-red-100 text-red-700"
-                      : data?.status === "SUBMITTED"
-                      ? "bg-gray-200 text-black-100 "
-                      : "bg-yellow-100 text-yellow-700"
-                  }`}
+                  className={` w-fit py-1 px-2 rounded text-xl font-semibold  capitalize ${getClaimStatusClasses(
+                    data?.status as ClaimStatusType
+                  )}`}
                 >
                   {data?.status.toLocaleLowerCase()}
                 </p>

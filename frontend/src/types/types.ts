@@ -62,3 +62,18 @@ export interface DashboardData {
   member: Member | null;
   claims: Claim[];
 }
+
+// export interface ClaimStatus {
+//   SUBMITTED: "SUBMITTED";
+//   IN_REVIEW: "IN_REVIEW";
+//   PROCESSED: "PROCESSED";
+//   PAID: "PAID";
+//   DENIED: "DENIED";
+// }
+
+export type ClaimStatusType =
+  | "SUBMITTED"
+  | "IN_REVIEW"
+  | "PROCESSED"
+  | "PAID"
+  | "DENIED";

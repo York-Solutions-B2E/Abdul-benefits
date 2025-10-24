@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { type Claim } from "../types/types";
+import { type Claim, type ClaimStatusType } from "../types/types";
 import { Link, useNavigate } from "react-router-dom";
 
 import { CLAIMS_QUERY } from "../graphql/queries";
+import { getClaimStatusClasses } from "../util/claimStatusColors";
 
 const GRAPHQL_ENDPOINT = "http://localhost:8080/graphql";
 
@@ -388,13 +389,13 @@ export default function ClaimsList() {
                     </td>
                     <td>
                       <span
-                        className={`px-2 py-1 rounded text-xs font-semibold ${
-                          claim.status === "PROCESSED"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-gray-200 text-gray-600"
-                        }`}
+                        className={`px-2 py-1 rounded text-xs font-semibold ${getClaimStatusClasses(
+                          claim?.status as ClaimStatusType
+                        )}`}
                       >
-                        {claim.status}
+                        {claim.status == "IN_REVIEW"
+                          ? claim.status.replace("_", " ")
+                          : claim.status}
                       </span>
                     </td>
                     <td className="text-right p-2 text-gray-800">

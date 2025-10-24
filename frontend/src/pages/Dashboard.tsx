@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDashboardData } from "../hooks/useDashboardData";
 import { useEffect, useState } from "react";
+import type { ClaimStatusType } from "../types/types";
+import { getClaimStatusClasses } from "../util/claimStatusColors";
 
 interface Props {
   memberId: string;
@@ -128,15 +130,9 @@ export default function Dashboard() {
                   <p className="font-semibold">
                     #{claim.claimNumber} -{" "}
                     <span
-                      className={`text-sm p-1 rounded capitalize ${
-                        claim.status === "PROCESSED"
-                          ? "bg-green-100 text-green-700"
-                          : claim.status === "DENIED"
-                          ? "bg-red-100 text-red-700"
-                          : claim.status === "SUBMITTED"
-                          ? "bg-gray-200 text-black-100 "
-                          : "bg-yellow-100 text-yellow-700"
-                      }`}
+                      className={`text-sm p-1 rounded capitalize ${getClaimStatusClasses(
+                        claim?.status as ClaimStatusType
+                      )}`}
                     >
                       {claim.status.toLocaleLowerCase()}
                     </span>
