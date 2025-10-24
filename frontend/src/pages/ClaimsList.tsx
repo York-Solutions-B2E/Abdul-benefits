@@ -199,7 +199,10 @@ export default function ClaimsList() {
                 </button>
               </label>
               {showDropdown && (
-                <div className="flex flex-col gap-2 mt-1 z-10 text-gray-800 w-48 bg-white divide-y divide-gray-100 rounded shadow-xl absolute top-14 p-2">
+                <div
+                  className="flex flex-col gap-2 mt-1 z-10 text-gray-800 w-48 bg-white divide-y divide-gray-100 rounded shadow-xl absolute top-14 p-2"
+                  onMouseLeave={() => setShowDropdown(false)}
+                >
                   {[
                     "processed",
                     "pending",
