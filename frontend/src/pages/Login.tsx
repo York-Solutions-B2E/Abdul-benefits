@@ -40,7 +40,12 @@ export default function Login() {
   return (
     <div className="bg-red w-screen h-screen flex items-center justify-center ">
       <GoogleOAuthProvider clientId={clientId}>
-        <div className="w-3/4 h-1/2 flex items-center justify-center gap-2  shadow-base-300 z-1 space-y-6 rounded-xl shadow-lg  sm:min-w-md bg-green-100 overflow-hidden">
+        <div className="w-2/4 h-1/2 flex items-center justify-center gap-2  shadow-base-300 z-1 space-y-6 rounded-xl shadow-lg  sm:min-w-md bg-green-100 overflow-hidden">
+          <div className="text">
+            <h1 className="text-6xl text-gray-700">Hello,</h1>
+            <p className="text-6xl text-gray-700">Welcome to</p>
+            <p className="text-gray-800 text-7xl underline">Benefits</p>
+          </div>
           <div className="w-1/2 h-full flex flex-col justify-center items-center">
             <GoogleLogin
               onSuccess={handleLogin}
