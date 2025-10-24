@@ -83,8 +83,14 @@ public class DataInitializer {
 
         Member newMember = memberRepo.save(member);
 
+        ClaimStatus[] statuses = ClaimStatus.values();
+
+        Random  random = new Random();
+
         // Claims
         for (int i = 1; i <= 16; i++) {
+
+            ClaimStatus randomStatus = statuses[random.nextInt(statuses.length)];
 
             Provider RandomProvider = providerRepo.findAll().stream()
                     .skip(new Random().nextInt((int) providerRepo.count()))
@@ -98,7 +104,7 @@ public class DataInitializer {
             claim.setServiceStartDate(LocalDate.now().minusDays(20L * i));
             claim.setServiceEndDate(LocalDate.now().minusDays(20L * (i - 1)));
             claim.setReceivedDate(LocalDate.now().minusDays(20L * (i - 1)));
-            claim.setStatus(ClaimStatus.PROCESSED);
+            claim.setStatus(randomStatus);
             claim.setTotalBilled(BigDecimal.valueOf(300 + i * 50));
             claim.setTotalAllowed(BigDecimal.valueOf(250 + i * 40));
             claim.setTotalPlanPaid(BigDecimal.valueOf(200 + i * 30));
@@ -166,6 +172,8 @@ public class DataInitializer {
                             .add(line.getCoinsuranceApplied()))
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+
+        if(claim.getStatus() == ClaimStatus.PAID || claim.getStatus() == ClaimStatus.PROCESSED){
             for (Accumulator acc : currentEnrollment.getAccumulators()) {
                 if (acc.getTier() == NetworkTier.IN_NETWORK) {
                     if (acc.getType() == AccumulatorType.DEDUCTIBLE) {
@@ -176,11 +184,12 @@ public class DataInitializer {
                     }
                 }
             }
+        }
 
             // Status events
             ClaimStatusEvent event = new ClaimStatusEvent();
             event.setClaim(claim);
-            event.setStatus(ClaimStatus.PROCESSED);
+            event.setStatus(claim.getStatus());
             event.setOccurredAt(OffsetDateTime.now().minusDays(3));
             claimStatusEventRepo.save(event);
         }
