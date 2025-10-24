@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -85,11 +86,15 @@ public class DataInitializer {
         // Claims
         for (int i = 1; i <= 16; i++) {
 
+            Provider RandomProvider = providerRepo.findAll().stream()
+                    .skip(new Random().nextInt((int) providerRepo.count()))
+                    .findFirst().orElse(null);
+
             Claim claim = new Claim();
 
             claim.setClaimNumber("C-" + UUID.randomUUID().toString().substring(0, 4).toUpperCase());
             claim.setMember(member);
-            claim.setProvider(provider);
+            claim.setProvider(RandomProvider);
             claim.setServiceStartDate(LocalDate.now().minusDays(20L * i));
             claim.setServiceEndDate(LocalDate.now().minusDays(20L * (i - 1)));
             claim.setReceivedDate(LocalDate.now().minusDays(20L * (i - 1)));
@@ -107,7 +112,7 @@ public class DataInitializer {
                             null,  // id auto-generated
                             claim, // parent claim
                             1,     // lineNumber
-                            "99213", // CPT code (office visit)
+                            "99213", // CPT code
                             "Office visit, established patient, 15 minutes",
                             new BigDecimal("150.00"), // billedAmount
                             new BigDecimal("120.00"), // allowedAmount
