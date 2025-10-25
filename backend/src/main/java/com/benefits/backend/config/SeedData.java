@@ -2,11 +2,13 @@ package com.benefits.backend.config;
 
 
 import com.benefits.backend.dto.PlanDto;
+import com.benefits.backend.dto.ProviderDto;
 import com.benefits.backend.entity.Address;
 import com.benefits.backend.entity.Plan;
 import com.benefits.backend.entity.Provider;
 import com.benefits.backend.entity.enums.PlanType;
 import com.benefits.backend.mapper.PlanMapper;
+import com.benefits.backend.mapper.ProviderMapper;
 import com.benefits.backend.repository.PlanRepository;
 import com.benefits.backend.repository.ProviderRepository;
 import jakarta.annotation.PostConstruct;
@@ -38,13 +40,17 @@ public class SeedData {
         }
 
         if (providerRepository.count() == 0) {
-            providerRepository.saveAll(List.of(new Provider(null, "Springfield Clinic", "Family Medicine",
+
+            List<ProviderDto> providersList = (List.of(new ProviderDto(null, "Springfield Clinic", "Family Medicine",
                             new Address("123 Main St", null, "Springfield", "IL", "62704"), "555-111-2222"),
-                    new Provider(null, "Bright Dental", "Dentistry",
+                    new ProviderDto(null, "Bright Dental", "Dentistry",
                             new Address("45 Smile Ave", null, "Springfield", "IL", "62703"), "555-333-4444"),
-                    new Provider(null, "CardioCare Associates", "Cardiology",
+                    new ProviderDto(null, "CardioCare Associates", "Cardiology",
                             new Address("78 Heart Blvd", null, "Springfield", "IL", "62702"), "555-555-6666")
             ));
+            List<Provider> providers = providersList.stream().map((provider) -> ProviderMapper.dtoToProvider(provider)).collect(Collectors.toList());
+
+            providerRepository.saveAll(providers);
 
             System.out.println("Provider seed data loaded");
         }

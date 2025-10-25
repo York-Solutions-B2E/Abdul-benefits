@@ -2,6 +2,7 @@ package com.benefits.backend.controller;
 
 import com.benefits.backend.dto.MemberDto;
 import com.benefits.backend.dto.PlanDto;
+import com.benefits.backend.dto.ProviderDto;
 import com.benefits.backend.entity.*;
 import com.benefits.backend.repository.*;
 import com.benefits.backend.service.GraphQLService;
@@ -43,7 +44,7 @@ public class GraphQLController {
 
 //    Providers
     @QueryMapping
-    public List<Provider> providers() {
+    public List<ProviderDto> providers() {
         return graphQLService.getAllProviders();
     }
 
