@@ -10,15 +10,15 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="w-screen bg-green-300 text-black p-4 flex justify-between items-center">
+    <nav className="w-screen bg-gray-100 text-black py-4 px-20 flex justify-between items-center shadow-black border-b border-gray-300 transition-all ease-in-out">
+      <Link to="/dashboard" className="font-bold hover:text-black">
+        Benefits
+      </Link>
       <div className="flex items-center space-x-4">
-        <Link to="/dashboard" className="font-bold hover:text-black">
-          Benefits
-        </Link>
-        <Link to="/dashboard" className="hover:text-black">
+        <Link to="/dashboard" className="hover:text-gray-400">
           Dashboard
         </Link>
-        <Link to="/claims" className="hover:text-black">
+        <Link to="/claims" className="hover:text-gray-400">
           Claims
         </Link>
       </div>
@@ -29,7 +29,7 @@ export default function NavBar() {
         </span>
         <button
           onClick={handleLogout}
-          className="bg-transparent border hover:bg-red-600 hover:text-black text-red-700 px-3 py-1 rounded cursor-pointer"
+          className="bg-transparent border hover:text-red-400  text-red-700 px-3 py-1 rounded cursor-pointer"
         >
           Logout
         </button>

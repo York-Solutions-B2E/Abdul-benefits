@@ -16,6 +16,9 @@ export default function ClaimDetail() {
   const { claimNumber } = useParams();
   const { data, loading, error } = useClaimDetailData(claimNumber!);
 
+  //   if (data?.status.toLocaleLowerCase() === "in_review")
+  //     data.status = "In Review";
+
   console.log(data);
   return (
     <div className="text-green-950 bg-gray-100 w-screen h-fit md:h-screen flex items-center justify-center mx-auto pt-10 md:pt-20">
@@ -44,7 +47,9 @@ export default function ClaimDetail() {
                     data?.status as ClaimStatusType
                   )}`}
                 >
-                  {data?.status.toLocaleLowerCase()}
+                  {data?.status == "IN_REVIEW"
+                    ? "In Review"
+                    : data?.status.toLocaleLowerCase()}
                 </p>
               </div>
             </div>

@@ -74,6 +74,7 @@ export interface DashboardData {
 export type ClaimStatusType =
   | "SUBMITTED"
   | "IN_REVIEW"
+  | "In Review"
   | "PROCESSED"
   | "PAID"
   | "DENIED";

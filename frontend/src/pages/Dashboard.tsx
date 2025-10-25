@@ -134,7 +134,9 @@ export default function Dashboard() {
                         claim?.status as ClaimStatusType
                       )}`}
                     >
-                      {claim.status.toLocaleLowerCase()}
+                      {claim.status == "IN_REVIEW"
+                        ? "IN REVIEW"
+                        : claim?.status}
                     </span>
                   </p>
                   <p className="text-sm text-gray-700">

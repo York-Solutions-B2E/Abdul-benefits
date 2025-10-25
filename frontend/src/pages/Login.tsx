@@ -26,7 +26,7 @@ export default function Login() {
         headers: { Authorization: `Bearer ${googleToken}` },
       });
 
-      console.log("Authenticated user:", res.data);
+      console.log("Authenticated user: ", res.data);
 
       localStorage.setItem("user", JSON.stringify(res.data));
       localStorage.setItem("token", googleToken);
@@ -40,13 +40,13 @@ export default function Login() {
   return (
     <div className="bg-red w-screen h-screen flex items-center justify-center ">
       <GoogleOAuthProvider clientId={clientId}>
-        <div className="w-2/4 h-1/2 flex items-center justify-center gap-2  shadow-base-300 z-1 space-y-6 rounded-xl shadow-lg  sm:min-w-md bg-green-100 overflow-hidden">
-          <div className="text">
+        <div className="w-2/4 h-1/2 flex items-center justify-center gap-2  shadow-base-300 z-1 space-y-6 rounded-xl shadow-lg  sm:min-w-md bg-green-100 overflow-hidden ">
+          <div className="flex flex-col justify-center items-start text bg-white h-full w-1/2 m-0 p-8">
             <h1 className="text-6xl text-gray-700">Hello,</h1>
             <p className="text-6xl text-gray-700">Welcome to</p>
-            <p className="text-gray-800 text-7xl underline">Benefits</p>
+            <p className="text-green-800 text-7xl">Benefits</p>
           </div>
-          <div className="w-1/2 h-full flex flex-col justify-center items-center">
+          <div className="w-1/2 h-full flex justify-center items-center">
             <GoogleLogin
               onSuccess={handleLogin}
               onError={() => console.log("Login Failed")}

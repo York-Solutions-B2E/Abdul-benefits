@@ -19,7 +19,9 @@ export default function ClaimsList() {
   const [totalPages, setTotalPages] = useState<number>();
 
   // Sorting states
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
+  const [sortColumn, setSortColumn] = useState<string | null>(
+    "serviceStartDate"
+  );
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   // Filtering states
@@ -165,7 +167,7 @@ export default function ClaimsList() {
 
   return (
     <div className="claimsList text-green-950 bg-gray-100 w-screen h-full pt-20 flex items-center justify-center mx-auto">
-      <div className="container bg-transparent w-4/5 md:w-[65%] flex flex-col gap-10 h-3/4">
+      <div className="container bg-transparent w-4/5 md:w-[65%] flex flex-col gap-10 h-screen">
         <div className="header">
           <h1 className="text-3xl text-green-700 font-bold">Claims List</h1>
           <p className="text-gray-500">Filter and browse all your claims.</p>
@@ -207,9 +209,9 @@ export default function ClaimsList() {
                   {[
                     "processed",
                     "pending",
-                    "in Review",
-                    "sumbitted",
-                    "Paid",
+                    "in_review",
+                    "submitted",
+                    "paid",
                     "denied",
                   ].map((status) => (
                     <label
@@ -228,7 +230,9 @@ export default function ClaimsList() {
                             );
                         }}
                       />
-                      {status}
+                      {status === "in_review"
+                        ? status.replace("_", " ")
+                        : status}
                     </label>
                   ))}
                 </div>
@@ -278,7 +282,7 @@ export default function ClaimsList() {
             </label>
             <label
               htmlFor="claim-filter"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 min-fit "
             >
               Claim #
               <input
@@ -443,7 +447,7 @@ export default function ClaimsList() {
               <button
                 onClick={() => setPage((p) => Math.max(p - 1, 0))}
                 disabled={page === 0}
-                className={`px-4 py-1 rounded text-sm font-medium border ${
+                className={`px-4 py-1 rounded text-sm font-medium border cursor-pointer ${
                   page === 0
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                     : "bg-green-600 text-white hover:bg-green-700 transition"
@@ -458,7 +462,7 @@ export default function ClaimsList() {
               <button
                 onClick={() => setPage((p) => p + 1)}
                 disabled={page + 1 >= totalPages}
-                className={`px-4 py-1 rounded text-sm font-medium border ${
+                className={`px-4 py-1 rounded text-sm font-medium border cursor-pointer ${
                   page + 1 >= totalPages
                     ? "bg-white text-gray-400 cursor-not-allowed"
                     : "bg-green-600 text-white hover:bg-green-700 transition"
