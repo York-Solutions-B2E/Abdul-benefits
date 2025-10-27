@@ -43,7 +43,7 @@ benefits-mini/
 ## 🖥️ Local Development Setup
 
 ### Prerequisites
-- Java 17+ (for Spring Boot)
+- Java 25 (for Spring Boot)
 - Maven (for building the backend)
 - Node.js 18+ (for React frontend)
 - PostgreSQL 16+
@@ -93,11 +93,11 @@ psql -c "GRANT ALL PRIVILEGES ON DATABASE benefits TO postgres;"
 
 ```
 cd backend
-mvn clean install
-mvn spring-boot:run
+./mvnw clean install
+./mvnw spring-boot:run
 ```
 - API will run at http://localhost:8080.
-### 3. Frontend (React + TypeScript)
+### 3. Frontend (React + TypeScript )
 
 - Default dev server: `http://localhost:5173`.
 - Communicates with backend using Axios.
@@ -108,5 +108,5 @@ mvn spring-boot:run
 ```
 cd frontend
 npm install
-npm start
+npm run dev
 ```
