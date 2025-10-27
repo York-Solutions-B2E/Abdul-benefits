@@ -1,9 +1,6 @@
 package com.benefits.backend.controller;
 
-import com.benefits.backend.dto.ClaimDto;
-import com.benefits.backend.dto.MemberDto;
-import com.benefits.backend.dto.PlanDto;
-import com.benefits.backend.dto.ProviderDto;
+import com.benefits.backend.dto.*;
 import com.benefits.backend.entity.*;
 import com.benefits.backend.repository.*;
 import com.benefits.backend.service.GraphQLService;
@@ -64,17 +61,13 @@ public class GraphQLController {
 
 //    Enrollments
     @QueryMapping
-    public List<Enrollment> enrollments() {
+    public List<EnrollmentDto> enrollments() {
         return graphQLService.getAllEnrollments();
     }
 
     @SchemaMapping(typeName = "MemberDto", field = "activeEnrollment")
-    public Enrollment getActiveEnrollment(MemberDto memberDto) {
-        return enrollmentRepo.findByMemberId(memberDto.getId())
-                .stream()
-                .filter(Enrollment::getActive)
-                .findFirst()
-                .orElse(null);
+    public EnrollmentDto getActiveEnrollment(MemberDto memberDto) {
+        return graphQLService.getActiveEnrollment(memberDto);
     }
 
 }

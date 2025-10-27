@@ -11,7 +11,7 @@ type Query {
     memberById(id: ID!): MemberDto
     plans: [Plan!]!
     providers: [Provider!]!
-    enrollments: [Enrollment!]!
+    enrollments: [EnrollmentDto!]!
     #    activeEnrollment(memberId:ID):Enrollment
     claims(memberId: ID!, page: Int = 0, size: Int = 10): [Claim!]!
     #    claims(memberId: ID!): [Claim!]!
@@ -53,6 +53,15 @@ type Address {
 }
 
 type Enrollment {
+    id: ID!
+    plan: Plan!
+    coverageStart: String
+    coverageEnd: String
+    active: Boolean!
+    accumulators: [Accumulator!]!
+}
+
+type EnrollmentDto {
     id: ID!
     plan: Plan!
     coverageStart: String

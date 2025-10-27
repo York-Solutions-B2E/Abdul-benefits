@@ -1,14 +1,8 @@
 package com.benefits.backend.service.impl;
 
-import com.benefits.backend.dto.ClaimDto;
-import com.benefits.backend.dto.MemberDto;
-import com.benefits.backend.dto.PlanDto;
-import com.benefits.backend.dto.ProviderDto;
+import com.benefits.backend.dto.*;
 import com.benefits.backend.entity.*;
-import com.benefits.backend.mapper.ClaimMapper;
-import com.benefits.backend.mapper.MemberMapper;
-import com.benefits.backend.mapper.PlanMapper;
-import com.benefits.backend.mapper.ProviderMapper;
+import com.benefits.backend.mapper.*;
 import com.benefits.backend.repository.*;
 import com.benefits.backend.service.GraphQLService;
 import com.benefits.backend.util.ClaimPage;
@@ -92,7 +86,21 @@ public class GraphQLServiceImpl implements GraphQLService {
 
     //    Enrollment
     @Override
-    public List<Enrollment> getAllEnrollments() {
-        return enrollmentRepo.findAll();
+    public List<EnrollmentDto> getAllEnrollments() {
+
+        List<Enrollment> enrollments = enrollmentRepo.findAll();
+
+        return enrollments.stream().map((e) -> EnrollmentMapper.enrollmentToDto(e)).collect(Collectors.toList());
+    }
+
+    @Override
+    public EnrollmentDto getActiveEnrollment(MemberDto memberDto) {
+        return enrollmentRepo.findByMemberId(memberDto.getId())
+                .stream()
+                .filter(Enrollment::getActive)
+                .map(EnrollmentMapper::enrollmentToDto)
+                .findFirst()
+                .orElse(null);
+
     }
 }

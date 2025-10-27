@@ -1,9 +1,6 @@
 package com.benefits.backend.service;
 
-import com.benefits.backend.dto.ClaimDto;
-import com.benefits.backend.dto.MemberDto;
-import com.benefits.backend.dto.PlanDto;
-import com.benefits.backend.dto.ProviderDto;
+import com.benefits.backend.dto.*;
 import com.benefits.backend.entity.*;
 import com.benefits.backend.util.ClaimPage;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +15,8 @@ public interface GraphQLService {
     List<ProviderDto> getAllProviders();
     List<Claim> getClaimByMemberId(UUID memberId);
     ClaimDto getByClaimNumber(String claimNumber);
-    List<Enrollment> getAllEnrollments();
+    List<EnrollmentDto> getAllEnrollments();
+    EnrollmentDto getActiveEnrollment(MemberDto memberDto);
 //    List<Claim> getClaimsByMemberIdPaged(UUID memberId, Pageable pageable);
     ClaimPage getClaimsByMemberIdPaged(UUID memberId, Pageable pageable);
 }
