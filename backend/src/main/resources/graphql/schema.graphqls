@@ -16,7 +16,7 @@ type Query {
     claims(memberId: ID!, page: Int = 0, size: Int = 10): [Claim!]!
     #    claims(memberId: ID!): [Claim!]!
     claimsList(memberId: ID!, page: Int!, size: Int!): ClaimPage
-    getByClaimNumber(claimNumber:String!) : Claim!
+    getByClaimNumber(claimNumber:String!) : ClaimDto!
 }
 
 type Member {
@@ -78,6 +78,22 @@ type Provider {
 }
 
 type Claim {
+    id: ID!
+    claimNumber: String!
+    provider: Provider!
+    serviceStartDate: String
+    serviceEndDate: String
+    receivedDate: String
+    status: String!
+    totalBilled: Float
+    totalAllowed: Float
+    totalPlanPaid: Float
+    totalMemberResponsibility: Float
+    lines: [ClaimLine!]!
+    statusHistory: [ClaimStatusEvent!]!
+}
+
+type ClaimDto {
     id: ID!
     claimNumber: String!
     provider: Provider!

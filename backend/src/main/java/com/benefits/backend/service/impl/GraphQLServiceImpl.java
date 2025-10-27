@@ -1,9 +1,11 @@
 package com.benefits.backend.service.impl;
 
+import com.benefits.backend.dto.ClaimDto;
 import com.benefits.backend.dto.MemberDto;
 import com.benefits.backend.dto.PlanDto;
 import com.benefits.backend.dto.ProviderDto;
 import com.benefits.backend.entity.*;
+import com.benefits.backend.mapper.ClaimMapper;
 import com.benefits.backend.mapper.MemberMapper;
 import com.benefits.backend.mapper.PlanMapper;
 import com.benefits.backend.mapper.ProviderMapper;
@@ -31,7 +33,6 @@ public class GraphQLServiceImpl implements GraphQLService {
 
 
 //    GraphQl methods
-
 
     //    Member
     public MemberDto getMemberById(UUID id) {
@@ -73,8 +74,8 @@ public class GraphQLServiceImpl implements GraphQLService {
     }
 
     @Override
-    public Claim getByClaimNumber(String claimNumber) {
-        return claimRepo.findByClaimNumber(claimNumber);
+    public ClaimDto getByClaimNumber(String claimNumber) {
+        return ClaimMapper.claimToDto(claimRepo.findByClaimNumber(claimNumber));
     }
 
 //    public List<Claim> getClaimsByMemberIdPaged(UUID memberId, Pageable pageable) {

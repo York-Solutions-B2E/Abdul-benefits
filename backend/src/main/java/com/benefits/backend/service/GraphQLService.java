@@ -1,5 +1,6 @@
 package com.benefits.backend.service;
 
+import com.benefits.backend.dto.ClaimDto;
 import com.benefits.backend.dto.MemberDto;
 import com.benefits.backend.dto.PlanDto;
 import com.benefits.backend.dto.ProviderDto;
@@ -16,7 +17,7 @@ public interface GraphQLService {
     List<PlanDto> getAllPlans();
     List<ProviderDto> getAllProviders();
     List<Claim> getClaimByMemberId(UUID memberId);
-    Claim  getByClaimNumber(String claimNumber);
+    ClaimDto getByClaimNumber(String claimNumber);
     List<Enrollment> getAllEnrollments();
 //    List<Claim> getClaimsByMemberIdPaged(UUID memberId, Pageable pageable);
     ClaimPage getClaimsByMemberIdPaged(UUID memberId, Pageable pageable);

@@ -1,5 +1,6 @@
 package com.benefits.backend.controller;
 
+import com.benefits.backend.dto.ClaimDto;
 import com.benefits.backend.dto.MemberDto;
 import com.benefits.backend.dto.PlanDto;
 import com.benefits.backend.dto.ProviderDto;
@@ -57,7 +58,7 @@ public class GraphQLController {
     }
 
     @QueryMapping
-    public Claim getByClaimNumber(@Argument String claimNumber) {
+    public ClaimDto getByClaimNumber(@Argument String claimNumber) {
         return graphQLService.getByClaimNumber(claimNumber);
     }
 
