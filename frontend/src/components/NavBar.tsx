@@ -10,7 +10,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="w-screen bg-gray-100 text-black py-4 px-20 flex justify-between items-center shadow-black border-b border-gray-300 transition-all ease-in-out">
+    <nav className="w-screen bg-gray-50 text-black py-4 px-20 flex justify-between items-center shadow-black border-b border-gray-200 transition-all ease-in-out">
       <Link to="/dashboard" className="font-bold hover:text-black">
         Benefits
       </Link>

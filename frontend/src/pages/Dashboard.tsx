@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import type { ClaimStatusType } from "../types/types";
 import { getClaimStatusClasses } from "../util/claimStatusColors";
 
-interface Props {
-  memberId: string;
-}
-
 export default function Dashboard() {
   const [user, setUser] = useState<{ memberId: string } | null>(null);
 
@@ -30,10 +26,19 @@ export default function Dashboard() {
     }
   }, [error, navigate]);
 
-  if (loading) return <div className="p-4">Loading...</div>;
+  if (loading)
+    return (
+      <div className="p-4" role="status" aria-live="polite">
+        Loading...
+      </div>
+    );
   if (error) return <div className="p-4 text-red-500">{error}</div>;
   if (!data || !data.member)
-    return <div className="p-4 text-black">No data</div>;
+    return (
+      <div className="p-4 text-black" role="alert">
+        No data
+      </div>
+    );
 
   const { member, claims } = data;
 
@@ -41,12 +46,8 @@ export default function Dashboard() {
     (a) => a.tier === "IN_NETWORK"
   );
 
-  console.log(inNetworkAccums);
-
-  //   const { type, usedAmount, limitAmount } = inNetworkAccums;
-
   return (
-    <div className="space-y-6 text-black w-screen h-screen flex flex-col items-center justify-start bg-gray-100 pt-40">
+    <div className="space-y-6 text-black w-screen h-screen flex flex-col items-center justify-start bg-gray-50 pt-40">
       <div className="flex flex-col md:flex-row gap-4 w-4/5 md:w-[65%] bg-transparentn relative">
         <h2 className="absolute top-[-100px] left-0 text-3xl text-gray-600 font-light">
           Welcome,
@@ -54,10 +55,6 @@ export default function Dashboard() {
             {" " + member.firstName || "Member"} 👋
           </span>
         </h2>
-
-        {/* <div className="self-start absolute">
-          <h1>Dashboard</h1>
-        </div> */}
         <div className=" flex flex-col gap-4 rounded h-fit  md:h-full w-full md:w-1/2 m-0">
           <div className="flex flex-col gap-4 h-fit md:h-1/2 bg-white shadow p-4 rounded">
             <p className="text-md text-green-700 w-fit py-1 px-2 bg-green-200 rounded-4xl">

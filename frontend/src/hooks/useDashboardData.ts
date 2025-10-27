@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { type DashboardData } from "../types/types";
 import { DASHBOARD_QUERY } from "../graphql/queries";
-// import { useFetchData } from "./useFetchData";
 
 const GRAPHQL_ENDPOINT = "http://localhost:8080/graphql";
 
@@ -26,7 +25,6 @@ export const useDashboardData = (memberId?: string) => {
             },
           }
         );
-        console.log("Response: ", response);
         const resData = response.data.data;
 
         setData({
@@ -36,7 +34,6 @@ export const useDashboardData = (memberId?: string) => {
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
-          //   console.log("ERROR: " + err);
         } else {
           setError("Error fetching dashboard data");
         }
@@ -47,7 +44,6 @@ export const useDashboardData = (memberId?: string) => {
 
     fetchData();
   }, [memberId, error]);
-  //   useFetchData(GRAPHQL_ENDPOINT, DASHBOARD_QUERY, { memberId });
 
   return { data, loading, error };
 };

@@ -166,13 +166,13 @@ export default function ClaimsList() {
     );
 
   return (
-    <div className="claimsList text-green-950 bg-gray-100 w-screen h-full pt-20 flex items-center justify-center mx-auto">
+    <div className="claimsList text-green-950 bg-gray-50 w-screen min-h-screen pt-20 flex items-center justify-center mx-auto">
       <div className="container bg-transparent w-4/5 md:w-[65%] flex flex-col gap-10 h-screen">
         <div className="header">
           <h1 className="text-3xl text-green-700 font-bold">Claims List</h1>
           <p className="text-gray-500">Filter and browse all your claims.</p>
         </div>
-        <div className="body bg-white w-full h-fit rounded-lg shadow p-4 overflow-x-scroll md:overflow-x-auto">
+        <div className="body bg-white w-full min-h-fit block rounded-lg shadow p-4 overflow-x-scroll md:overflow-x-clip">
           <div className="filter w-full h-fit flex items-center gap-4 pb-8 ">
             <div className="relative">
               <label className="flex flex-col text-sm font-medium text-gray-700">
@@ -180,7 +180,7 @@ export default function ClaimsList() {
                 <button
                   id="dropdownCheckboxButton"
                   onClick={() => setShowDropdown(!showDropdown)}
-                  className="w-fit text-gray-400 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded text-sm p-2 text-center inline-flex items-center bg-gray-100 border-gray-300 "
+                  className="w-fit text-gray-400 focus:ring-2 focus:outline-none focus:ring-green-300 font-medium rounded text-sm p-2 text-center inline-flex items-center bg-gray-50 shadow border-gray-300 "
                   type="button"
                 >
                   Status
@@ -248,7 +248,7 @@ export default function ClaimsList() {
                 id="date-start-filter"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full  bg-gray-100 p-2 border-gray-300 rounded text-sm  outline-green-500 placeholder-gray-600"
+                className="w-full  bg-gray-50 shadow p-2 border-gray-300 rounded text-sm  outline-green-500 placeholder-gray-600"
               />
             </label>
 
@@ -262,7 +262,7 @@ export default function ClaimsList() {
                 id="date-end-filter"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full bg-gray-100 p-2 border-gray-300 text-sm outline-green-500"
+                className="w-full bg-gray-50 shadow p-2 border-gray-300 text-sm outline-green-500"
               />
             </label>
 
@@ -277,7 +277,7 @@ export default function ClaimsList() {
                 id="provider-filter"
                 value={providerFilter}
                 onChange={(e) => setProviderFilter(e.target.value)}
-                className="w-full bg-gray-100 p-2 text-sm outline-green-500"
+                className="w-full bg-gray-50 shadow p-2 text-sm outline-green-500"
               />
             </label>
             <label
@@ -291,7 +291,7 @@ export default function ClaimsList() {
                 id="claim-filter"
                 value={claimNumberFilter}
                 onChange={(e) => setClaimNumberFilter(e.target.value)}
-                className="w-full bg-gray-100 p-2 text-sm outline-green-500"
+                className="w-full bg-gray-50 shadow p-2 text-sm outline-green-500"
               />
             </label>
             <button
@@ -303,7 +303,7 @@ export default function ClaimsList() {
                 setEndDate("");
                 setShowDropdown(false);
               }}
-              className="ml-auto px-3 py-2 bg-gray-100 rounded text-sm hover:bg-gray-300 self-end"
+              className="ml-auto px-3 py-2 bg-gray-50 shadow rounded text-sm cursor-pointer hover:bg-gray-300 self-end"
             >
               X
             </button>
@@ -367,7 +367,7 @@ export default function ClaimsList() {
                 {filteredClaims.map((claim) => (
                   <tr
                     key={claim.id}
-                    className="border-b border-b-gray-200 hover:bg-gray-100 transition cursor-pointer"
+                    className="border-b border-b-gray-200 hover:bg-green-50 transition cursor-pointer"
                     onClick={() => navigate(`/claims/${claim.claimNumber}`)}
                   >
                     <td className="p-2 text-green-700 font-medium">

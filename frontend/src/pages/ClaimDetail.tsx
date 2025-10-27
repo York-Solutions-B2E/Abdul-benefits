@@ -1,27 +1,14 @@
-// interface ClaimDetailProps {
-//   id: string;
-// }
-
 import { Link, useParams } from "react-router-dom";
 import { useClaimDetailData } from "../hooks/useClaimDetailData";
 
 import { getClaimStatusClasses } from "../util/claimStatusColors";
 import { type ClaimStatusType } from "../types/types";
 
-// interface Props {
-//   claimNumber: string;
-// }
-
 export default function ClaimDetail() {
   const { claimNumber } = useParams();
   const { data, loading, error } = useClaimDetailData(claimNumber!);
-
-  //   if (data?.status.toLocaleLowerCase() === "in_review")
-  //     data.status = "In Review";
-
-  console.log(data);
   return (
-    <div className="text-green-950 bg-gray-100 w-screen h-fit md:h-screen flex items-center justify-center mx-auto pt-10 md:pt-20">
+    <div className="text-green-950 bg-gray-50 w-screen h-fit md:h-screen flex items-center justify-center mx-auto pt-10 md:pt-20">
       <div className="w-4/5 md:w-[65%] h-fit flex flex-col gap-4 relative">
         <Link
           to="/claims"
@@ -151,7 +138,6 @@ export default function ClaimDetail() {
               </table>
             </div>
           </div>
-          {/* <hr className="color-gray-400" /> */}
         </div>
       </div>
     </div>
